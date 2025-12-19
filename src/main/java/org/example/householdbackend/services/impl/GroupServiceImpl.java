@@ -86,7 +86,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public List<GroupResponse> getGroupsByUserId(Long userId) {
-        List<Group> groups = groupRepository.findByUserId(userId);
+        List<Group> groups = groupRepository.findByCreatedBy_Id(userId);
         return groupMapper.groupToGroupDtos(groups);
     }
 

@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface GroupMapper {
     List<GroupResponse> groupToGroupDtos(List<Group> groups);
     GroupResponse groupToGroupDto(Group group);
