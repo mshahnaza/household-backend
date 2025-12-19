@@ -44,9 +44,13 @@ public class GroupMembershipServiceImpl implements GroupMembershipService {
     }
 
     @Override
-    public GroupMembershipResponse changeMemberRole(Long memberId, Group_Role role) {
+    public GroupMembershipResponse changeMemberRole(Long memberId, String role) {
         GroupMembership groupMembership = groupMembershipRepository.findByUser_Id(memberId);
-        groupMembership.setRole(role);
+        if(role.equals(Group_Role.ROLE_USER.toString())) {
+            groupMembership.setRole(Group_Role.ROLE_USER);
+        } else {
+            groupMembership.setRole(Group_Role.ROLE_ADMIN);
+        }
         groupMembershipRepository.save(groupMembership);
         return groupMembershipMapper.groupMembershipToGroupMembershipDto(groupMembership);
     }
