@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
     Optional<Group> findById(Long id);
-    Optional<Group> findByName(String name);
-    List<Group> findByUserId(Long userId);
+    List<Group> findAllByName(String name);
+    List<Group> findByCreatedBy_Id(Long userId);
     Optional<Group> findByInvitationCode(String invitationCode);
 }
