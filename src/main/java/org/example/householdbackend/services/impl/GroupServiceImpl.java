@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.householdbackend.dto.request.GroupRequest;
 import org.example.householdbackend.dto.response.GroupResponse;
 import org.example.householdbackend.entities.Group;
+import org.example.householdbackend.entities.GroupMembership;
+import org.example.householdbackend.enums.Group_Role;
 import org.example.householdbackend.mappers.GroupMapper;
+import org.example.householdbackend.repositories.GroupMembershipRepository;
 import org.example.householdbackend.repositories.GroupRepository;
 import org.example.householdbackend.services.GroupService;
 import org.springframework.stereotype.Service;
@@ -13,13 +16,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class GroupServiceImpl implements GroupService {
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
+    private final GroupMembershipRepository groupMembershipRepository;
 
     @Override
     public GroupResponse createGroup(GroupRequest groupRequest) {
@@ -36,6 +39,13 @@ public class GroupServiceImpl implements GroupService {
                 .build();
 
         groupRepository.save(group);
+
+        GroupMembership groupMembership = GroupMembership.builder()
+                .group(group)
+//                .user(currentUser)
+                .role(Group_Role.ROLE_ADMIN)
+                .build();
+        groupMembershipRepository.save(groupMembership);
 
         return groupMapper.groupToGroupDto(group);
     }
@@ -89,6 +99,14 @@ public class GroupServiceImpl implements GroupService {
         group.setInviteCodeExpirationTime(LocalDateTime.now().plusHours(1));
         groupRepository.save(group);
         return groupMapper.groupToGroupDto(group);
+    }
+
+    @Override
+    public int countMembers(Long groupId) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new EntityNotFoundException("Group with id " + groupId + " not found"));
+
+        return group.getMembers().size();
     }
 
     private String generateRandomCode() {
