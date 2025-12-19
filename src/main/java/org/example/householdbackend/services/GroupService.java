@@ -13,4 +13,5 @@ public interface GroupService {
     GroupResponse getGroupInfo(Long id);
     List<GroupResponse> getGroupsByUserId(Long userId);
     GroupResponse createInvintationCode(Long groupId);
+    int countMembers(Long groupId);
 }
