@@ -20,9 +20,11 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(length = 100)
     private String description;
 
-    @Column(name = "invitation_code", unique = true, length = 8)
+    @Column(name = "invitation_code", unique = true, length = 10)
     private String invitationCode;
 
     private LocalDateTime inviteCodeExpirationTime;
