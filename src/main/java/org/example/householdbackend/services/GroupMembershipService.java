@@ -8,6 +8,6 @@ import java.util.List;
 public interface GroupMembershipService {
     GroupMembershipResponse joinGroupByCode(String code);
     void removeMember(Long memberId);
-    GroupMembershipResponse changeMemberRole(Long memberId, String role);
+    GroupMembershipResponse changeMemberRole(Long groupId, Long memberId, String role);
     List<GroupMembershipResponse> getGroupMembers(Long groupId);
 }

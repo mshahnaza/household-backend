@@ -14,7 +14,7 @@ import org.example.householdbackend.enums.Group_Role;
 @AllArgsConstructor
 public class GroupMembershipResponse {
     private Long id;
-    private Group group;
-    private User user;
+    private Long groupId;
+    private Long userId;
     private String role;
 }

@@ -18,8 +18,7 @@ public class GroupController {
     private final GroupService groupService;
 
     @PostMapping("/create")
-    public ResponseEntity<GroupResponse> createGroup(
-            @Valid @RequestBody GroupRequest groupRequest) {
+    public ResponseEntity<GroupResponse> createGroup(@Valid @RequestBody GroupRequest groupRequest) {
         GroupResponse response = groupService.createGroup(groupRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -53,8 +52,9 @@ public class GroupController {
     }
 
     @PatchMapping("/invitation-code/{groupId}")
-    GroupResponse generateInvitationCode(@PathVariable Long groupId) {
-        return groupService.createInvintationCode(groupId);
+    public ResponseEntity<GroupResponse> generateInvitationCode(@PathVariable Long groupId) {
+        GroupResponse groupResponse = groupService.createInvintationCode(groupId);
+        return ResponseEntity.ok(groupResponse);
     }
 
     @GetMapping("/members/count/{groupId}")

@@ -27,9 +27,9 @@ public class GroupMembershipController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{memberId}/change-role")
-    public ResponseEntity<GroupMembershipResponse> changeMemberRole(@PathVariable Long memberId, @RequestParam String role) {
-        GroupMembershipResponse response = groupMembershipService.changeMemberRole(memberId, role);
+    @PatchMapping("{groupId}/members/{memberId}/role")
+    public ResponseEntity<GroupMembershipResponse> changeMemberRole(@PathVariable Long groupId, @PathVariable Long memberId, @RequestParam String role) {
+        GroupMembershipResponse response = groupMembershipService.changeMemberRole(groupId, memberId, role);
         return ResponseEntity.ok(response);
     }
 
