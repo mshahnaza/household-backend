@@ -12,6 +12,7 @@ import org.example.householdbackend.repositories.GroupRepository;
 import org.example.householdbackend.services.GroupMembershipService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +27,16 @@ public class GroupMembershipServiceImpl implements GroupMembershipService {
         Group group = groupRepository.findByInvitationCode(code)
                 .orElseThrow(() -> new RuntimeException("Group not found"));
 
+        if (group.getInviteCodeExpirationTime() == null) {
+            throw new IllegalStateException("Invitation code has no expiration time");
+        }
+
+        if (group.getInviteCodeExpirationTime().isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Invitation code has expired");
+        }
+
 //        User user = userService.getCurrentUser();
+        //TODO check if user is already a member of a group
 
         GroupMembership groupMembership = GroupMembership.builder()
                 .group(group)
