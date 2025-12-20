@@ -44,8 +44,10 @@ public class GroupMembershipServiceImpl implements GroupMembershipService {
     }
 
     @Override
-    public GroupMembershipResponse changeMemberRole(Long memberId, String role) {
-        GroupMembership groupMembership = groupMembershipRepository.findByUser_Id(memberId);
+    public GroupMembershipResponse changeMemberRole(Long groupId, Long memberId, String role) {
+//        User currentUser = userService.getCurrentUser();
+//        if (currentUser.getId.equals(memberId)) throw new RuntimeException("You cannot change your own role");
+        GroupMembership groupMembership = groupMembershipRepository.findByGroup_IdAndUser_Id(groupId, memberId);
         if(role.equals(Group_Role.ROLE_USER.toString())) {
             groupMembership.setRole(Group_Role.ROLE_USER);
         } else {

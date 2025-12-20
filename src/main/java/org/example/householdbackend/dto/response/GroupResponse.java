@@ -5,12 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
 public class GroupResponse {
-    private String groupId;
+    private Long groupId;
     private String name;
     private String description;
+    private String invitationCode;
+    private LocalDateTime inviteCodeExpirationTime;
 }
