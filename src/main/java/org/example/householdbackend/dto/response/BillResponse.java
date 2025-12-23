@@ -1,6 +1,5 @@
-package org.example.householdbackend.entities;
+package org.example.householdbackend.dto.response;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,29 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "bills")
-@Builder
 @Data
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class Bill {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BillResponse {
     private Long id;
-
     private String title;
     private String description;
     private BigDecimal amount;
     private String currency;
     private String receiptPhotoPath;
     private String status;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_to")
-    private User assignedTo;
-
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+    private Long assignedUserId;
+    private Long groupId;
 }
