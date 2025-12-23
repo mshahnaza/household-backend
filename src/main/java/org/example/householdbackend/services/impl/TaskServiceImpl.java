@@ -3,6 +3,7 @@ package org.example.householdbackend.services.impl;
 import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import org.example.householdbackend.dto.request.TaskRequest;
+import org.example.householdbackend.dto.request.TaskStatusRequest;
 import org.example.householdbackend.dto.response.TaskResponse;
 import org.example.householdbackend.entities.Task;
 import org.example.householdbackend.mappers.TaskMapper;
@@ -60,5 +61,13 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskResponse> getAllTasks() {
         List<Task> tasks = taskRepository.findAll();
         return taskMapper.taskToTaskDtos(tasks);
+    }
+
+    @Override
+    public TaskResponse updateTaskStatus(long id, TaskStatusRequest taskStatusRequest) {
+        Task task = taskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        task.setStatus(taskStatusRequest.getStatus());
+        Task taskUpdated = taskRepository.save(task);
+        return taskMapper.taskToTaskDto(taskUpdated);
     }
 }
