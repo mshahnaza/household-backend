@@ -1,0 +1,19 @@
+package org.example.householdbackend.services;
+
+import org.example.householdbackend.dto.request.TaskRequest;
+import org.example.householdbackend.dto.response.TaskResponse;
+
+import java.util.List;
+
+public interface TaskService {
+
+    TaskResponse addTask(TaskRequest taskRequest);
+
+    void deleteTask(Long id);
+
+    TaskResponse updateTask(long id, TaskRequest taskRquest);
+
+    TaskResponse getTaskById(Long id);
+
+    List<TaskResponse> getAllTasks();
+}

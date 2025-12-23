@@ -24,6 +24,7 @@ public class Task {
     private String status;
     private LocalDate dueDate;
     private LocalDate completedAt;
+    private String frequency;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_to_id")
