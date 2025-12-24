@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class TaskResponse {
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private String status;

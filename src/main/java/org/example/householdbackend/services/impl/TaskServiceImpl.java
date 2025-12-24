@@ -1,6 +1,5 @@
 package org.example.householdbackend.services.impl;
 
-import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import org.example.householdbackend.dto.request.TaskRequest;
 import org.example.householdbackend.dto.request.TaskStatusRequest;
@@ -12,7 +11,6 @@ import org.example.householdbackend.services.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +45,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponse updateTask(long id, TaskRequest taskRequest) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        task.setTitle(taskRequest.getTitle());
+        task.setDescription(taskRequest.getDescription());
+        task.setDueDate(taskRequest.getDueDate());
+        task.setFrequency(taskRequest.getFrequency());
+        task.setAssignedTo(taskRequest.getAssignedTo());
         taskRepository.save(task);
         return taskMapper.taskToTaskDto(task);
     }
