@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserMapper {
     List<UserResponse> userToUserDtos(List<User> all);
 
-    UserResponse userToUserDto(List<User> userByUsername);
+    UserResponse userToUserDto(Usergi userByUsername);
 }
