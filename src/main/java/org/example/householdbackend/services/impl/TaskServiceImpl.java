@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.householdbackend.dto.request.TaskRequest;
 import org.example.householdbackend.dto.request.TaskStatusRequest;
 import org.example.householdbackend.dto.response.TaskResponse;
+import org.example.householdbackend.dto.response.TaskStatusResponse;
 import org.example.householdbackend.entities.Task;
 import org.example.householdbackend.mappers.TaskMapper;
 import org.example.householdbackend.repositories.TaskRepository;
@@ -67,10 +68,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponse updateTaskStatus(long id, TaskStatusRequest taskStatusRequest) {
+    public TaskStatusResponse updateTaskStatus(long id, TaskStatusRequest taskStatusRequest) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
         task.setStatus(taskStatusRequest.getStatus());
         Task taskUpdated = taskRepository.save(task);
-        return taskMapper.taskToTaskDto(taskUpdated);
+        return taskMapper.taskStatusToTaskStatusDto(taskUpdated);
     }
 }

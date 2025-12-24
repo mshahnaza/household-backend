@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.householdbackend.dto.request.TaskRequest;
 import org.example.householdbackend.dto.request.TaskStatusRequest;
 import org.example.householdbackend.dto.response.TaskResponse;
+import org.example.householdbackend.dto.response.TaskStatusResponse;
 import org.example.householdbackend.services.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
     @PatchMapping("/update/{id}/status")
-    public ResponseEntity<TaskResponse> statusTask(@PathVariable long id, @RequestBody TaskStatusRequest taskStatusRequest) {
-        TaskResponse response = taskService.updateTaskStatus(id, taskStatusRequest);
+    public ResponseEntity<TaskStatusResponse> statusTask(@PathVariable long id, @RequestBody TaskStatusRequest taskStatusRequest) {
+        TaskStatusResponse response = taskService.updateTaskStatus(id, taskStatusRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -3,6 +3,7 @@ package org.example.householdbackend.services;
 import org.example.householdbackend.dto.request.TaskRequest;
 import org.example.householdbackend.dto.request.TaskStatusRequest;
 import org.example.householdbackend.dto.response.TaskResponse;
+import org.example.householdbackend.dto.response.TaskStatusResponse;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface TaskService {
 
     List<TaskResponse> getAllTasks();
 
-    TaskResponse updateTaskStatus(long id, TaskStatusRequest taskStatusRequest);
+    TaskStatusResponse updateTaskStatus(long id, TaskStatusRequest taskStatusRequest);
 }
